@@ -6,16 +6,15 @@
         cron-checker
       </h1>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
+        <nuxt-link
           rel="noopener noreferrer"
           class="button--green"
+          to="/addcron"
         >
-          Documentation
-        </a>
+          Addcron
+        </nuxt-link>
         <a
-          href="https://github.com/nuxt/nuxt.js"
+          href="https://github.com/pwnsoni/cron-checker"
           target="_blank"
           rel="noopener noreferrer"
           class="button--grey"
