@@ -53,7 +53,7 @@ export default {}
     sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 100px;
+  font-size: 6vw;
   color: #35495e;
   letter-spacing: 1px;
 }

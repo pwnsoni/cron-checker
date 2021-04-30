@@ -10,7 +10,7 @@
                 label-cols-sm="4"
                 label-cols-lg="4"
                 content-cols-sm
-                content-cols-lg="7"
+                content-cols-lg="8"
                 description="Let us know your Email."
                 label="Enter your Email"
                 label-for="input-horizontal"
@@ -22,7 +22,7 @@
                 label-cols-sm="4"
                 label-cols-lg="4"
                 content-cols-sm
-                content-cols-lg="7"
+                content-cols-lg="8"
                 description="Name of the cron"
                 label="Name of the cron"
                 label-for="input-horizontal"
@@ -35,12 +35,12 @@
                 label-cols-sm="4"
                 label-cols-lg="4"
                 content-cols-sm
-                content-cols-lg="7"
+                content-cols-lg="8"
                 description="Cron statement"
                 label="Cron statement"
                 label-for="input-horizontal"
                 >
-                <b-form-input id="input-horizontal" v-model="cronStatement"></b-form-input>
+                <b-form-input id="input-horizontal" v-model="form.cronStatement"></b-form-input>
             </b-form-group>
 
             <b-form-group
@@ -48,7 +48,7 @@
                 label-cols-sm="4"
                 label-cols-lg="4"
                 content-cols-sm
-                content-cols-lg="7"
+                content-cols-lg="8"
                 description="Whatever"
                 label="Whatever"
                 label-for="input-horizontal"
@@ -61,7 +61,7 @@
                 label-cols-sm="10"
                 label-cols-lg="4"
                 content-cols-sm
-                content-cols-lg="7"
+                content-cols-lg="8"
                 description="Whatever"
                 label="Whatever"
                 label-for="input-horizontal"
@@ -126,12 +126,11 @@
 }
 #mine{
     width: 100%;
-    height: 45px;
+    height: 50px;
     margin: auto;
+    margin-top: 2%;
     transition-duration: 0.4s;
-    border: 2px solid #35495e; 
-    /* padding-left: 10%;
-    padding-right: 10%; */
+    border: 0.5px solid #35495e;
 }
 #mine:hover {
   background-color: #35495e; /* Green */
@@ -157,6 +156,8 @@
   letter-spacing: 1px;
   text-align: center;
   padding: 5%;
+  padding-bottom: 2%;
+  padding-top: 2%;
 }
 
 </style>
