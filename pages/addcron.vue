@@ -119,7 +119,7 @@
 <style>
 
 #form{
-    margin-left: 10%;
+    margin-left: 5%;
     margin-right: 10%;
     margin-bottom: 10%;
     padding-left: 10%;

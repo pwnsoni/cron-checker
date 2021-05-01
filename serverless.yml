@@ -1,0 +1,23 @@
+service: cron-checker-ui # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  nuxt:
+    handler: handler.render
+    events:
+      - http: 
+          path: /
+          method: ANY
+          cors: true
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
+
+
