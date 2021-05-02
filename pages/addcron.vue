@@ -3,79 +3,81 @@
     <h1 class="title">
         Add Info about your cron
     </h1>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <div id="form">
-            <b-form-group
-                id="fieldset-horizontal"
-                label-cols-sm="4"
-                label-cols-lg="4"
-                content-cols-sm
-                content-cols-lg="8"
-                description="Let us know your Email."
-                label="Enter your Email"
-                label-for="input-horizontal"
-                >
-                <b-form-input id="input-horizontal" v-model="form.email"></b-form-input>
-            </b-form-group>
-            <b-form-group
-                id="fieldset-horizontal"
-                label-cols-sm="4"
-                label-cols-lg="4"
-                content-cols-sm
-                content-cols-lg="8"
-                description="Name of the cron"
-                label="Name of the cron"
-                label-for="input-horizontal"
-                >
-                <b-form-input id="input-horizontal"></b-form-input>
-            </b-form-group>
+    <div id="form">
+      <b-form @submit="onSubmit" >
+          <div v-if="showCron">
+              <b-form-group
+                  id="fieldset-horizontal"
+                  label-cols-sm="4"
+                  label-cols-lg="4"
+                  content-cols-sm
+                  content-cols-lg="8"
+                  description="Let us know your Email."
+                  label="Enter your Email"
+                  label-for="input-horizontal"
+                  >
+                  <b-form-input id="input-horizontal" v-model="form.creater"></b-form-input>
+              </b-form-group>
+              <b-form-group
+                  id="fieldset-horizontal"
+                  label-cols-sm="4"
+                  label-cols-lg="4"
+                  content-cols-sm
+                  content-cols-lg="8"
+                  description="Name of the cron"
+                  label="Name of the cron"
+                  label-for="input-horizontal"
+                  >
+                  <b-form-input id="input-horizontal" v-model="form.name"></b-form-input>
+              </b-form-group>
 
-            <b-form-group
-                id="fieldset-horizontal"
-                label-cols-sm="4"
-                label-cols-lg="4"
-                content-cols-sm
-                content-cols-lg="8"
-                description="Cron statement"
-                label="Cron statement"
-                label-for="input-horizontal"
-                >
-                <b-form-input id="input-horizontal" v-model="form.cronStatement"></b-form-input>
-            </b-form-group>
+              <b-form-group
+                  id="fieldset-horizontal"
+                  label-cols-sm="4"
+                  label-cols-lg="4"
+                  content-cols-sm
+                  content-cols-lg="8"
+                  description="Cron statement"
+                  label="Cron statement"
+                  label-for="input-horizontal"
+                  >
+                  <b-form-input id="input-horizontal" v-model="form.cronStatement"></b-form-input>
+              </b-form-group>
 
-            <b-form-group
-                id="fieldset-horizontal"
-                label-cols-sm="4"
-                label-cols-lg="4"
-                content-cols-sm
-                content-cols-lg="8"
-                description="Whatever"
-                label="Whatever"
-                label-for="input-horizontal"
-                >
-                <b-form-input id="input-horizontal"></b-form-input>
-            </b-form-group>
+              <b-form-group
+                  id="fieldset-horizontal"
+                  label-cols-sm="4"
+                  label-cols-lg="4"
+                  content-cols-sm
+                  content-cols-lg="8"
+                  description="Little description about your cron"
+                  label="Description"
+                  label-for="input-horizontal"
+                  >
+                  <b-form-input id="input-horizontal" v-model="form.description"></b-form-input>
+              </b-form-group>
 
-            <b-form-group
-                id="fieldset-horizontal"
-                label-cols-sm="10"
-                label-cols-lg="4"
-                content-cols-sm
-                content-cols-lg="8"
-                description="Whatever"
-                label="Whatever"
-                label-for="input-horizontal"
-                >
-                <b-form-input id="input-horizontal"></b-form-input>
-            </b-form-group>
-
-            <div>
-                <button id="mine" type="submit"> Submit </button>
+              <b-form-group
+                  id="fieldset-horizontal"
+                  label-cols-sm="4"
+                  label-cols-lg="4"
+                  content-cols-sm
+                  content-cols-lg="8"
+                  description="List of users you want to notify"
+                  label="Recipients List"
+                  label-for="input-horizontal"
+                  >
+                  <b-form-input id="input-horizontal" v-model="form.recipients"></b-form-input>
+              </b-form-group>
             </div>
-
-        </div>
+          <SubmitButton v-if='!spin' />
+          <div class="text-center" v-if='spin'>
+            <b-spinner variant="primary" label="Text Centered"></b-spinner>
+          </div>
+       
+        
     </b-form>
-
+ </div>
   </div>
 </template>
 
@@ -84,35 +86,44 @@
     data() {
       return {
         form: {
-          email: '',
+          creater: '',
           name: '',
           cronStatement: '',
-          food: null,
-          checked: []
+          description: '',
+          recipients: ''
         },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
-      }
+        showCron: true,
+        spin: false
+        }
     },
     methods: {
-      onSubmit(event) {
+      async onSubmit(event) {
         event.preventDefault()
         alert(JSON.stringify(this.form))
+        this.spin = true;
+        let responseCron = await this.$axios.post('/api/cron', {form: this.form});
+        this.makeToast(true, "Saved the cron in DB", responseCron.data.result._id);
+        this.form.cron_id = responseCron.data.result._id;
+        let responseSnsGroup = await this.$axios.post('/api/snsGroup', {form: this.form});
+        this.makeToast(true, "Saved the snsGroup in DB", responseSnsGroup.data.result._id);
+        this.spin = false;
+        this.makeToastForBackGround(true, "Mapping cron with snsGroup");
       },
-      onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
+      makeToast(append = false, title, _id) {
+        this.$bvToast.toast(`Id : ${_id}`, {
+          title: title,
+          autoHideDelay: 5000,
+          appendToast: append
+        })
+      },
+      makeToastForBackGround(append = false, title) {
+        this.$bvToast.toast(`In Bakcground`, {
+          title: title,
+          autoHideDelay: 5000,
+          appendToast: append
         })
       }
-    }
+    } 
   }
 </script>
 
@@ -123,19 +134,6 @@
     margin-right: 10%;
     margin-bottom: 10%;
     padding-left: 10%;
-}
-#mine{
-    width: 100%;
-    height: 50px;
-    margin: auto;
-    margin-top: 2%;
-    transition-duration: 0.4s;
-    border: 0.5px solid #35495e;
-}
-#mine:hover {
-  background-color: #35495e; /* Green */
-  color: white;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .title {

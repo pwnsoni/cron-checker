@@ -9,12 +9,16 @@ app.use(bodyParser.json());
 const { loadNuxt} = require('nuxt');
 app.use('/_nuxt', express.static('./.nuxt/dist/client'))
 
+const router = express.Router();
+const routes = require('./routes/index.js');
+
+app.use('/api', routes(router));
+
 
 app.get('/*', async (req, res) => {
-    console.log(process.env.MONGO_CONNECTION_URI)
     console.log(`serving start ${req.url}`)
     console.log('initiating Nuxt');
-    const nuxt = await loadNuxt('dev')
+    const nuxt = await loadNuxt('start')
     nuxt.render(req, res);
     console.log('served')
 })
