@@ -1,7 +1,8 @@
+
 <template>
-  <div>
+  <div class='contain'>
     <h1 class="title1">
-        Add Info about your cron
+        Generate a session
     </h1>
     <div id="form">
       <b-form @submit="onSubmit" >
@@ -37,37 +38,11 @@
                   label-cols-lg="4"
                   content-cols-sm
                   content-cols-lg="8"
-                  description="Cron statement"
-                  label="Cron statement"
+                  description="the id communicated to you"
+                  label="ID of the cron"
                   label-for="input-horizontal"
                   >
-                  <b-form-input id="input-horizontal" v-model="form.cronStatement"></b-form-input>
-              </b-form-group>
-
-              <b-form-group
-                  id="fieldset-horizontal"
-                  label-cols-sm="4"
-                  label-cols-lg="4"
-                  content-cols-sm
-                  content-cols-lg="8"
-                  description="Little description about your cron"
-                  label="Description"
-                  label-for="input-horizontal"
-                  >
-                  <b-form-input id="input-horizontal" v-model="form.description"></b-form-input>
-              </b-form-group>
-
-              <b-form-group
-                  id="fieldset-horizontal"
-                  label-cols-sm="4"
-                  label-cols-lg="4"
-                  content-cols-sm
-                  content-cols-lg="8"
-                  description="List of users you want to notify"
-                  label="Recipients List"
-                  label-for="input-horizontal"
-                  >
-                  <b-form-input id="input-horizontal" v-model="form.recipients"></b-form-input>
+                  <b-form-input id="input-horizontal" v-model="form._id"></b-form-input>
               </b-form-group>
             </div>
           <SubmitButton v-if='!spin' />
@@ -96,18 +71,20 @@
         spin: false
         }
     },
+    mounted(){
+      if (this.$store.state.isActiveSession){
+        this.$router.push('/dashboard/' + this.$store.state.cron._id);
+      }
+    },
     methods: {
       async onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.form))
         this.spin = true;
-        let responseCron = await this.$axios.post('/api/cron', {form: this.form});
-        this.makeToast(true, "Saved the cron in DB", responseCron.data.result._id);
-        this.form.cron_id = responseCron.data.result._id;
-        let responseSnsGroup = await this.$axios.post('/api/snsGroup', {form: this.form});
-        this.makeToast(true, "Saved the snsGroup in DB", responseSnsGroup.data.result._id);
-        this.spin = false;
+        alert(this.form._id);
+        console.log('INITIATE_SESSION', this.form._id)
+        await this.$store.dispatch('INITIATE_SESSION', {cron_id: this.form._id});
         this.makeToastForBackGround(true, "Mapping cron with snsGroup");
+        this.spin = false;
       },
       makeToast(append = false, title, _id) {
         this.$bvToast.toast(`Id : ${_id}`, {

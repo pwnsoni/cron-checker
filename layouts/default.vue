@@ -7,6 +7,11 @@
 </template>
 
 <style>
+
+.contain{
+  min-height: 87vh;
+}
+
 html {
   font-family:
     'Source Sans Pro',

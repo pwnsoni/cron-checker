@@ -47,6 +47,30 @@ const add = async (req, res) => {
 }
 
 const getThisCron = async (req, res) => {
+  console.log(`In get this cron, _id of the cron -> ${JSON.stringify(req.params)}`);
+  const {_id} = req.params;
+
+  mongoose.connect(connUri, { useNewUrlParser : true, useUnifiedTopology: true }, async (err) => {
+    let result = {};
+    let status = 201;
+
+    if (!err){
+       try{
+        const crons = await Cron.findById({_id});
+        result.status = status;
+        result.error = err;
+        result.result = crons;
+       } catch(e){
+           result.status = 500;
+           result.error = e;
+       }
+       res.status(status).send(result);
+       mongoose.connection.close();
+
+    } else{
+      console.log(err)
+    }
+  });
 
 }
 

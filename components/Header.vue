@@ -8,27 +8,45 @@
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
                 <b-nav-item to="/addcron">Add-Cron</b-nav-item>
-                <b-nav-item href="#" disabled>Disabled</b-nav-item>
+                <b-nav-item to='/dashboard'>Dashboard</b-nav-item>
             </b-navbar-nav>
 
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto" id="right">
                 <b-navbar-nav>
                     <b-nav-item to="/addcron">Add-Cron</b-nav-item>
-                    <b-nav-item href="#"  disabled>Disabled</b-nav-item>
                 </b-navbar-nav>
                 <b-nav-item-dropdown right>
                 <template #button-content >
-                    <em>User</em>
+                    <em>{{cron}}</em>
                 </template>
-                <b-dropdown-item href="#" disabled>Profile</b-dropdown-item>
-                <b-dropdown-item href="#" disabled>Sign Out</b-dropdown-item>
+                <b-dropdown-item @click="removeSession">Remove Session</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav> 
             </b-collapse>
         </b-navbar>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+      cron () {
+        return this.$store.state.activeCron;
+      },
+      isSessionActive (){
+          return this.$store.state.isActiveSession;
+      }
+    },
+    methods: {
+        async removeSession(){
+            if (confirm('You will be logged out')){
+                await this.$store.dispatch('RESET_SESSION');
+            }
+        }
+    }
+}
+</script>
 
 <style>
 #home{
