@@ -104,8 +104,11 @@
         let responseCron = await this.$axios.post('/api/cron', {form: this.form});
         this.makeToast(true, "Saved the cron in DB", responseCron.data.result._id);
         this.form.cron_id = responseCron.data.result._id;
+        this.form.cronName = this.form.name;
         let responseSnsGroup = await this.$axios.post('/api/snsGroup', {form: this.form});
         this.makeToast(true, "Saved the snsGroup in DB", responseSnsGroup.data.result._id);
+        let responseLastHit = await this.$axios.post('/api/hit', {form: this.form});
+        this.makeToast(true, "Saved the last Hit in DB", responseLastHit.data.result._id);
         this.spin = false;
         this.makeToastForBackGround(true, "Mapping cron with snsGroup");
       },

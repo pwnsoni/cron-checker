@@ -8,7 +8,7 @@ const invoke = async (req, res) => {
         FunctionName: lambdaName, 
         InvocationType: "Event", 
         Payload: JSON.stringify(event), 
-        Qualifier: "1"
+        // Qualifier: "1"
        };
     let lambdaRes = await lambda.invoke(params).promise();
     console.log(lambdaRes);

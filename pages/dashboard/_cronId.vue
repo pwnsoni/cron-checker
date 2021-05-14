@@ -41,16 +41,16 @@
         </div>
 
         <div id="card-subtitle">
-          <strong> Registered On: </strong>{{cron.createdAt}} <br/>
+          <strong> Registered On: </strong>{{sns.createdAt}} <br/>
         </div>
 
         <br/>
 
         <div id="content"> 
-          <strong> Description: </strong>{{cron.description}} <br/>
+          <strong> Recipients: </strong>{{sns.recipients}} <br/>
           CloudWatch Event UUID: Yhi hai filhal to <br/>
           
-          updatedAt: {{cron.updatedAt}} <br/>
+          updatedAt: {{sns.updatedAt}} <br/>
         </div>
       </div>
     </div>
