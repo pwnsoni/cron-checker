@@ -1,0 +1,19 @@
+<template>
+  <div>
+    <b-iconstack font-scale="2" animation="cylon">
+      <b-icon
+        stacked
+        icon="three-dots"
+        animation="throb"
+        variant="info"
+        scale="0.75"
+      ></b-icon>
+      <b-icon
+        stacked
+        icon="circle"
+        animation="spin-reverse"
+        variant="info"
+      ></b-icon>
+    </b-iconstack>
+  </div>
+</template>

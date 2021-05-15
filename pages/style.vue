@@ -1,26 +1,11 @@
 <template>
 
   <div id="mainDiv">
-    <div id = "leftH">
+    <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
+    <b-icon icon="eye-slash" aria-hidden="true"></b-icon>
+    <b-icon icon="eye-fill" aria-hidden="true"></b-icon>
 
-    </div>
-
-    <div id="right">
-      <div id="formG">
-        <b-form-group
-        id="fieldset-horizontal"
-        label-cols-sm="10"
-        label-cols-lg="10"
-        content-cols-sm
-        content-cols-lg="10"
-        description="Let us know your name."
-        label="Enter your name"
-        label-for="input-horizontal"
-      >
-        <b-form-input id="input-horizontal"></b-form-input>
-      </b-form-group>
-    </div>
-    </div>
+    
 
   </div>
   

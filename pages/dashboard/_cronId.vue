@@ -23,9 +23,18 @@
 
         <div id="content"> 
           <strong> Description: </strong>{{cron.description}} <br/>
-          CloudWatch Event UUID: Yhi hai filhal to <br/>
+          <strong> Event Name </strong> {{cron.cloudWatchEventUUID}} <br/>
           
-          updatedAt: {{cron.updatedAt}} <br/>
+          <strong> UpdatedAt  </strong>{{cron.updatedAt}} <br/>
+        </div>
+        <div id="card-footer" v-if="!watch & !spinning" @click="toggleWatch()">
+          <strong> <b-icon icon="eye-fill" aria-hidden="true"> </b-icon> </strong> Tap here to start watching <br/>
+        </div>
+        <div id="card-footer" v-if="spinning">
+          <Spinincard />  
+        </div>
+        <div id="card-footer" v-if="watch & !spinning" @click="toggleWatch()">
+          <strong> <b-icon icon="eye-slash" aria-hidden="true"> </b-icon> </strong> Tap here to stop watching <br/>
         </div>
       </div>
       
@@ -48,7 +57,7 @@
 
         <div id="content"> 
           <strong> Recipients: </strong>{{sns.recipients}} <br/>
-          CloudWatch Event UUID: Yhi hai filhal to <br/>
+          <!-- CloudWatch Event UUID: Yhi hai filhal to <br/> -->
           
           updatedAt: {{sns.updatedAt}} <br/>
         </div>
@@ -68,6 +77,7 @@
           description: '',
           recipients: ''
         },
+        spinning: false
         }
     },
 
@@ -83,10 +93,20 @@
       },
       sns (){
         return this.$store.state.snsGroup;
+      },
+      watch(){
+        return this.$store.state.watch;
       }
     },
 
     methods: {
+      async toggleWatch(){
+        this.spinning = true;
+        alert('toggling')
+        console.log('TOGGLE_WATCH');
+        await this.$store.dispatch('TOGGLE_WATCH');
+        this.spinning = false;
+      },
       async onSubmit(event) {
         event.preventDefault()
         alert(JSON.stringify(this.form))
@@ -173,6 +193,19 @@
   color: rgb(3, 45, 58);
   padding-left: 10%;
 }
+
+#card-footer{
+  color: rgb(3, 45, 58);
+  text-align: center;
+  padding: 5%;
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+#card-footer:hover{
+  color: rgb(5, 74, 95);
+}
+
 
 
 .title1 {

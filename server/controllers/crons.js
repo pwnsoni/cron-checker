@@ -75,7 +75,30 @@ const getThisCron = async (req, res) => {
 }
 
 const updateThisCron = async (req, res) => {
+  console.log(`In get this cron, _id of the cron -> ${JSON.stringify(req.params)}`);
+  const {_id} = req.params;
 
+  mongoose.connect(connUri, { useNewUrlParser : true, useUnifiedTopology: true }, async (err) => {
+    const {cloudWatchEventUUID} = req.body;
+    let result = {};
+    let status = 201;
+    if (!err){
+        try{
+          const crons = await Cron.findByIdAndUpdate(_id, {cloudWatchEventUUID}, {new: true});
+         result.status = status;
+         result.result = crons;
+        } catch(e){
+            result.status = 500;
+            result.error = e;
+        }
+      console.log('done updating', result)
+       res.status(status).send(result);
+       mongoose.connection.close();
+
+    } else{
+      console.log(err)
+    }
+  });
 }
 
 const deleteThisCron = async (req, res) => {
