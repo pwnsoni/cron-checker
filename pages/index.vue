@@ -1,47 +1,40 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        cron-checker
-      </h1>
-      <div class="links">
-        <nuxt-link
-          rel="noopener noreferrer"
-          class="button--green"
-          to="/addcron"
-        >
-          Addcron
-        </nuxt-link>
-        <a
-          href="https://github.com/pwnsoni/cron-checker"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+    <div id="mainDiv">
+      <div id='card'>
+        <Slider />
       </div>
+
+      <div id="title">
+          Technology Stack
+      </div>
+        <div id="mid">
+            <span id="icon1" class="bigIcons" v-b-tooltip.hover title="AWS lambda and events"> <b-icon icon="cloud" aria-hidden="true" ></b-icon></span>
+            <!-- <span id="icon2" class="bigIcons"> <b-icon icon="people-fill" aria-hidden="true" ></b-icon></span> -->
+            <span id="icon2" class="bigIcons" v-b-tooltip.hover title="NuxtJs and Express JS"> <b-icon icon="code" aria-hidden="true" ></b-icon></span>
+        </div>
+              <div id="title">
+          Important Links
+      </div>
+        <div id="mid">
+            <span id="icon1" class="bigIcons"> <b-icon icon="people-fill" aria-hidden="true" ></b-icon></span>
+            <!-- <span id="icon2" class="bigIcons"> <b-icon icon="people-fill" aria-hidden="true" ></b-icon></span> -->
+            <span id="icon2" class="bigIcons" v-b-tooltip.hover title="visit github repo"> <b-icon icon="github" aria-hidden="true" ></b-icon></span>
+        </div>
     </div>
-  </div>
+    
 </template>
 
 <script>
-export default {}
+  export default {
+    
+  }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 87vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.title {
-  font-family:
+<style scoped>
+
+#title{
+      font-family:
     'Quicksand',
     'Source Sans Pro',
     -apple-system,
@@ -53,20 +46,50 @@ export default {}
     sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 6vw;
+  font-size: 3vw;
   color: #35495e;
   letter-spacing: 1px;
+  text-align: center;
+      padding-top: 3%;
+    padding-bottom: 3%;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.bigIcons{
+    font-size: 10vw;
+    margin-right: 20%;
+    margin-left: 20%;
+    top: 50%;
+    vertical-align: middle;
+
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
-.links {
-  padding-top: 15px;
+#content{
+    font-size: 3vw;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-right: 20%;
+    margin-left: 20%;
 }
+
+#mid{
+    /* height: 30vh; */
+    
+    display: flex;
+    justify-content: space-between;
+    transition: 0.5s;
+    max-width: 100vw;
+}
+
+#mid:hover{
+    background: rgb(204, 213, 221);
+}
+
+#mainDiv{
+    background: rgb(241, 243, 245);
+    max-width: 100vw;
+}
+
+
 </style>

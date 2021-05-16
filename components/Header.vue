@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <b-navbar toggleable="lg" type="light" variant="light">
+    <div >
+        <b-navbar toggleable="lg" type="light" variant="light" >
             <b-navbar-brand to="/" id="home">Cron-Checker</b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -15,6 +15,7 @@
             <b-navbar-nav class="ml-auto" id="right">
                 <b-navbar-nav>
                     <b-nav-item to="/addcron">Add-Cron</b-nav-item>
+                    <b-nav-item to="/style1">Style</b-nav-item>
                 </b-navbar-nav>
                 <b-nav-item-dropdown right>
                 <template #button-content >
@@ -49,6 +50,9 @@ export default {
 </script>
 
 <style>
+#headTop{
+    background: chartreuse;
+}
 #home{
     padding-left: 10%;
 }

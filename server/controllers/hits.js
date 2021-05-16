@@ -101,7 +101,7 @@ const recordHit = async (req, res) => {
 }
 
 const getThisHit = async (req, res) => {
-    console.log(`In get this Hit, _id of the cron -> ${JSON.stringify(req.params)}`);
+    console.log(`In get this Hit, _id of the lastHit -> ${JSON.stringify(req.params)}`);
     const {_id} = req.params;
   
     mongoose.connect(connUri, { useNewUrlParser : true, useUnifiedTopology: true }, async (err) => {

@@ -1,7 +1,9 @@
 <template>
     <div id="footer">
-        <b-navbar toggleable="lg" type="light" variant="light">
+        <b-navbar type="light" variant="light">
             <div id="centered"> Made with love by Nuxt </div>
+            <br/> <br/>
+            
         </b-navbar>
     </div>
 </template>
