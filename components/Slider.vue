@@ -39,7 +39,7 @@
 
         <b-carousel-slide img-blank img-alt="Blank image" style="max-height: 60vh ">
             <h1 id="title"> Documentatinon </h1>
-            <p id="content"> The Documentatinon explaining how to use this tool. </p>
+            <p id="content"> The <b-link to="/docs">Documentatinon</b-link> explaining how to use this tool. </p>
         </b-carousel-slide>
 
         <!-- Slide with blank fluid image to maintain slide aspect ratio -->

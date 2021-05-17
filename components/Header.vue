@@ -7,7 +7,7 @@
 
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-                <b-nav-item to="/addcron">Add-Cron</b-nav-item>
+                <!-- <b-nav-item to="/addcron">Add-Cron</b-nav-item> -->
                 <b-nav-item to='/dashboard'>Dashboard</b-nav-item>
             </b-navbar-nav>
 
@@ -15,7 +15,7 @@
             <b-navbar-nav class="ml-auto" id="right">
                 <b-navbar-nav>
                     <b-nav-item to="/addcron">Add-Cron</b-nav-item>
-                    <b-nav-item to="/style1">Style</b-nav-item>
+                    <b-nav-item to="/docs">Documentatinon</b-nav-item>
                 </b-navbar-nav>
                 <b-nav-item-dropdown right>
                 <template #button-content >

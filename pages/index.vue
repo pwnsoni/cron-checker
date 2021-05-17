@@ -16,9 +16,9 @@
           Important Links
       </div>
         <div id="mid">
-            <span id="icon1" class="bigIcons"> <b-icon icon="people-fill" aria-hidden="true" ></b-icon></span>
+            <span id="icon1" class="bigIcons" v-b-tooltip.hover title="Visit Docs"> <b-link to="/docs"> <b-icon icon="people-fill" aria-hidden="true" ></b-icon> </b-link></span>
             <!-- <span id="icon2" class="bigIcons"> <b-icon icon="people-fill" aria-hidden="true" ></b-icon></span> -->
-            <span id="icon2" class="bigIcons" v-b-tooltip.hover title="visit github repo"> <b-icon icon="github" aria-hidden="true" ></b-icon></span>
+            <span id="icon2" class="bigIcons" v-b-tooltip.hover title="visit github repo"><a href="https://github.com/pwnsoni/cron-checker" target="_blank">  <b-icon icon="github" aria-hidden="true" ></b-icon></a></span> 
         </div>
     </div>
     
@@ -60,7 +60,7 @@
     margin-left: 20%;
     top: 50%;
     vertical-align: middle;
-
+    color: #476585;
     padding-top: 3%;
     padding-bottom: 3%;
 }
