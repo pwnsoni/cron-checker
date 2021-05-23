@@ -97,7 +97,7 @@ export const actions = {
                     "ruleName": `rule_${state.cron._id}`,
                     "ruleExpression": state.cron.cronStatement,
                     "targetId": `target_${state.cron._id}`,
-                    "input": {"cron": state.cron, "sns": state.sns}
+                    "input": {"cron": state.cron._id, "sns": state.cron.snsGroup, "lastHit": state.cron.lastHits}
                 },
                 "lambdaName": "cron-checker-services-dev-createandmapRule",
             })
