@@ -23,7 +23,7 @@ This whole thing has been implemented completely serverless and under the free t
 
 ### Using Lambda
 
-* I have privileged AWS lambda functions for a lot of things
+I have privileged AWS lambda functions for a couple of things
 * For the backend and frontend
 * Invoking another lambda function
 * Creating and removing Cloudwatch Event Rules
