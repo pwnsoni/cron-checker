@@ -28,3 +28,45 @@ This whole thing has been implemented completely serverless and under the free t
 * Invoking another lambda function
 * Creating and removing Cloudwatch Event Rules
 * Adding permission in lambda so as it can be triggered by cloudwatch events
+
+
+## Functional Docs
+
+### Add-Cron
+
+You can register your cron on this page, there is a simple form where you have to enter a little details about the cron and the people that you want us to notify at the point when your cron was not executed at the time it was supposed to.
+Most of the form fields are simple to fill, just the cron statement which is a bit tricky.
+
+For this you can write cron statement to make your cron run in two ways:
+* Rate Expressions
+* Cloudwatch cron expression
+
+#### Rate Expressions
+
+Syntax: rate(value unit)
+value: A positive number.
+
+Unit: The unit of time. Different units are required for values of 1, such as minute, and values over 1, such as minutes.
+
+Valid values: minute | minutes | hour | hours | day | days
+
+Examples: rate(1 day), rate(3 days)
+
+#### Cloudwatch cron expression
+
+Cron expressions have six required fields, which are separated by white space.
+Syntax: cron(Feilds)
+
+Please go through the below link, to get the complete idea about how you can write your cron statement.
+docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+
+And just to make sure this doesn’t check the cron before the cron has executed, make sure you add a 5-10 minutes lag here.
+Adding the the cron just does not ensure that your cron is being monitored, you must tap on StartWatching link from the dashboard to start monitoring it.
+
+### Hit Your Cron
+
+After you have successfully registered your cron, We will share you a url and you have to make a put request to that particular url whenever your cron is executed with a body, format is shared below, and that way we will record your cron as executed.
+
+### Dashboard
+
+Suppose you have a registered cron, then you can see your dashboard containing the info about your cron, and other things like the recipients and the previous timestamp of your cron. If you need to update and know your stuff, It’s the page you want to check.
