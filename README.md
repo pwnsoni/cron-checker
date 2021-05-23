@@ -2,8 +2,8 @@
 ## Technical Docs
 ### Technology Stack
 
-For front end: Nuxt Js (SSR framework for VueJs).
-For Back end: Node Js (Express)
+* For front end: Nuxt Js (SSR framework for VueJs).
+* For Back end: Node Js (Express)
 For Deployment: Serverless deployment on AWS cloud (AWS lambda- for both FE and BE)
 For Other Microservices: AWS lambda and Cloudwatch Events
 Frameworks: serverless, nuxtJs, express, node-aws-sdk
