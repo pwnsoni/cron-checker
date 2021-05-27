@@ -12,13 +12,20 @@
               <b-modal id="modal-1" title="SNS Group">
                 <Spinincard v-if="spinningInModal"/> 
                 <p class="my-4" v-if="sns">{{sns.cronName}}</p>
-                <p v-if="sns"> {{sns.recipients}} </p>
+                <p v-if="sns" id="info"> <ShowList :list = sns.recipients /> </p>
               </b-modal>
-            <b-icon icon="calendar4-event" aria-hidden="true" @click="getLastHit()" v-b-tooltip.hover title="Previous hits of your cron" v-b-modal.modal-2></b-icon>
-              <b-modal id="modal-2" title="Last Hits">
+            <b-icon icon="calendar4-event" aria-hidden="true" @click="getLastHit()" v-b-tooltip.hover title="Success hits of your cron" v-b-modal.modal-2></b-icon>
+              <b-modal id="modal-2" title="Success Hits">
                 <Spinincard v-if="spinningInModal"/> 
                 <p class="my-4" v-if="hit">{{hit.cronName}}</p>
-                <p v-if="hit"> {{hit.lastHits}} </p>
+                <p id="success" v-if="hit"> <ShowList :list = hit.lastHits /> </p>
+              </b-modal>
+
+            <b-icon icon="exclamation-triangle" aria-hidden="true" @click="getLastHit()" v-b-tooltip.hover title="Failed hits of your cron" v-b-modal.modal-3></b-icon>
+              <b-modal id="modal-3" title="Failed Hits">
+                <Spinincard v-if="spinningInModal"/> 
+                <p class="my-4" v-if="hit">{{hit.cronName}}</p>
+                <p id="failed" v-if="hit"> <ShowList :list = hit.failedHits /> </p>
               </b-modal>
           </span> </p>
         </div>
@@ -215,6 +222,18 @@
 
 #center{
   float: center;
+}
+
+#failed{
+  color: red;
+}
+
+#info{
+  color: blue;
+}
+
+#success{
+  color: greenyellow;
 }
 
 #card-title{

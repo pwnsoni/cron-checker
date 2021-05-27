@@ -68,6 +68,7 @@ Adding the the cron just does not ensure that your cron is being monitored, you 
 After you have successfully registered your cron, We will share you a url and you have to make a put request to that particular url whenever your cron is executed with a body, format is shared below, and that way we will record your cron as executed.
 
 * url: https://api.iamonlambda.xyz/api/hit
+* method: PUT
 * {  "cron_id": "id communicated to you", "testing": boolean }
 * testing : true if you want to just test your cron 
 * testing : false when you are monitoring your cron.
