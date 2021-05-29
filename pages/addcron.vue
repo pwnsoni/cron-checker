@@ -16,7 +16,7 @@
                   label="Enter your Email"
                   label-for="input-horizontal"
                   >
-                  <b-form-input id="input-horizontal" v-model="form.creater"></b-form-input>
+                  <b-form-input id="input-horizontal" v-model="form.creater" type="email"></b-form-input>
               </b-form-group>
               <b-form-group
                   id="fieldset-horizontal"
@@ -37,7 +37,7 @@
                   label-cols-lg="4"
                   content-cols-sm
                   content-cols-lg="8"
-                  description="Cron statement"
+                  description="Cron statement, Please refer docs"
                   label="Cron statement"
                   label-for="input-horizontal"
                   >
@@ -63,7 +63,7 @@
                   label-cols-lg="4"
                   content-cols-sm
                   content-cols-lg="8"
-                  description="List of users you want to notify"
+                  description="space separated list emails of users you want to notify"
                   label="Recipients List"
                   label-for="input-horizontal"
                   >

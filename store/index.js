@@ -36,7 +36,21 @@ export const mutations = {
     },
     getLastHit(state, lastHit){
         state.lastHit = lastHit;
-    }
+    },
+    validateAxiosResult(state, code){
+        console.log(code)
+        if (code.status !== 201){
+            alert(`Error, Request failed with status code: ${code.status}`,);
+            this.$router.push('/dashboard/' + state.cron._id);
+        }
+    },
+    makeToast(append = false, title, code, vm) {
+        vm.$bvToast.toast(`Id : ${code}`, {
+          title: title,
+          autoHideDelay: 5000,
+          appendToast: append
+        })
+      },
 }
 
 export const actions = {
@@ -44,7 +58,8 @@ export const actions = {
     async INITIATE_SESSION({commit}, {cron_id}){
         console.log('in store', cron_id);
         let cron = await this.$axios.$get('/api/cron/' + cron_id);
-        console.log(cron.result);
+        console.log(cron);
+        commit('validateAxiosResult', {status: cron.status});
         commit('initiateSession', {cron: cron.result});
     },
 
@@ -74,7 +89,7 @@ export const actions = {
         commit('updateCron', cron.result);
     },
 
-    async TOGGLE_WATCH({commit, state}){
+    async TOGGLE_WATCH({commit, state}, {vm}){
         console.log(`before if ${state.watch}`)
         if (state.watch){
             console.log(`toggling in store if true ${state.watch}`)
@@ -86,9 +101,12 @@ export const actions = {
                 "lambdaName": "cron-checker-services-dev-removeRule",
             })
             console.log(JSON.stringify(res));
-            commit('toggle_watch', false)
-            let cron = await this.$axios.$put('/api/cron/' + state.cron._id, {cloudWatchEventUUID: null});
-            commit('updateCron', cron.result);
+            commit('validateAxiosResult', {status: res.data.statusCode, vm});
+            if (res.data.statusCode === 201){
+                commit('toggle_watch', false)
+                let cron = await this.$axios.$put('/api/cron/' + state.cron._id, {cloudWatchEventUUID: null});
+                commit('updateCron', cron.result);
+            }
         } else{
 
             console.log(`toggling in store if false ${state.watch}`)
@@ -102,9 +120,12 @@ export const actions = {
                 "lambdaName": "cron-checker-services-dev-createandmapRule",
             })
             console.log(JSON.stringify(res));
-            commit('toggle_watch', true)
-            let cron = await this.$axios.$put('/api/cron/' + state.cron._id, {cloudWatchEventUUID: `rule_${state.cron._id}`});
-            commit('updateCron', cron.result);
+            commit('validateAxiosResult', {status: res.data.statusCode, vm});
+            if (res.data.statusCode === 201){
+                commit('toggle_watch', true)
+                let cron = await this.$axios.$put('/api/cron/' + state.cron._id, {cloudWatchEventUUID: `rule_${state.cron._id}`});
+                commit('updateCron', cron.result);
+            }
         }
 
     }

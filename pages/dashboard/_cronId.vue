@@ -141,31 +141,16 @@
 
       async toggleWatch(){
         this.spinning = true;
-        console.log('TOGGLE_WATCH');
-        await this.$store.dispatch('TOGGLE_WATCH');
+        console.log('TOGGLE_WATCH');  
+        await this.$store.dispatch('TOGGLE_WATCH', {vm: this});
         this.spinning = false;
       },
       async onSubmit(event) {
         event.preventDefault()
-        alert(JSON.stringify(this.form))
-        this.spin = true;
-        let responseCron = await this.$axios.post('/api/cron', {form: this.form});
-        this.makeToast(true, "Saved the cron in DB", responseCron.data.result._id);
-        this.form.cron_id = responseCron.data.result._id;
-        let responseSnsGroup = await this.$axios.post('/api/snsGroup', {form: this.form});
         this.makeToast(true, "Saved the snsGroup in DB", responseSnsGroup.data.result._id);
-        this.spin = false;
-        this.makeToastForBackGround(true, "Mapping cron with snsGroup");
       },
       makeToast(append = false, title, _id) {
         this.$bvToast.toast(`Id : ${_id}`, {
-          title: title,
-          autoHideDelay: 5000,
-          appendToast: append
-        })
-      },
-      makeToastForBackGround(append = false, title) {
-        this.$bvToast.toast(`In Bakcground`, {
           title: title,
           autoHideDelay: 5000,
           appendToast: append
@@ -233,7 +218,7 @@
 }
 
 #success{
-  color: greenyellow;
+  color: rgba(6, 141, 17, 0.74);
 }
 
 #card-title{
